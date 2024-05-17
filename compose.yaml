@@ -1,0 +1,31 @@
+version: "1.0.0"
+name: "quiz_app"
+services:
+  UserSphere:
+    build:
+      context: "./user-sphere"
+      dockerfile: Dockerfile.dev
+    container_name: "UserSphereContainer"
+    networks:
+      - quizApp_network
+    volumes:
+      - quizApp_volume:/codespace/app/models
+    ports:
+      - "8000:8000"
+  AdminSphere:
+    build:
+      context: "./admin-sphere"
+      dockerfile: Dockerfile.dev
+    container_name: "AdminSphereContainer"
+    networks:
+      - quizApp_network
+    ports:
+      - "8001:8001"
+    volumes:
+      - quizApp_volume:/codespace/app/models
+   
+networks:
+  quizApp_network:
+volumes:
+  quizApp_volume:
+    driver: local

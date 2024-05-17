@@ -1,0 +1,32 @@
+# Use the Python 3.12 image as the base image
+FROM python:3.12
+
+# Set the working directory inside the container
+WORKDIR /adminCodespace
+
+# Update package lists and install necessary dependencies and remove dependencies for reducing size of image
+RUN apt-get update && apt-get install -y \
+    build-essential \    
+    libpq-dev \         
+    && rm -rf /var/lib/apt/lists/* 
+
+# Install Poetry package manager
+RUN pip install poetry
+
+# Disable virtual environment creation by Poetry
+RUN poetry config virtualenvs.create false
+
+# Copy the project's pyproject.toml file to the working directory
+COPY ./pyproject.toml /adminCodespace/
+
+# Install project dependencies using Poetry
+RUN poetry install
+
+# Copy the entire project directory to the working directory
+COPY . /adminCodespace/
+
+# Expose port 8000 for the application
+EXPOSE 8001
+
+# Define the default command to run the application using Poetry and Uvicorn
+CMD ["poetry", "run", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8001", "--reload"]

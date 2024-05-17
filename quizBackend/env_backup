@@ -1,0 +1,15 @@
+# Database connection strings
+DB_CONNECTION_STR = "Add your own database connection string"
+TEST_DB_CONNECTION_STR = "Add your own test database connection string"
+
+# JWT settings
+ALGORITHM = "Add algorithm which will be used to generate JWT tokens"
+SECRET_KEY = "Add secret key which will be used to generate JWT tokens"
+
+# Token expiration times (in minutes)
+ACCESS_TOKEN_EXPIRE_TIME = "Add access token expiration time (in minutes/hours) to generate access token"
+REFRESH_TOKEN_EXPIRE_TIME = "Add refresh token expiration time (in days/months) to generate refresh token"
+
+# Admin token settings
+ADMIN_TOKEN_EXPIRE_TIME = "Add admin token expiration time (in minutes) to generate admin token"
+ADMIN_SECRET_KEY = "Add admin secret key which will be used to generate admin token"
